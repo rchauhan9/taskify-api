@@ -15,9 +15,10 @@ def delete_task(event):
         'id': body["id"],
         'username': body["username"]
     })
-    return create_response()
+    return create_response(response)
 
-def create_response():
+
+def create_response(response):
     return {
         "statusCode": response['ResponseMetadata']['HTTPStatusCode'],
         "headers": {

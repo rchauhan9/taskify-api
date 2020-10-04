@@ -5,6 +5,7 @@ import json
 def lambda_handler(event, context):
     return create_task(event)
 
+
 def create_task(event):
     client = boto3.resource("dynamodb")
     table = client.Table("Taskify")
@@ -15,6 +16,7 @@ def create_task(event):
 
     response = table.put_item(Item=task)
     return create_response(response, task)
+
 
 def generate_task_object(body):
     if body:
@@ -30,6 +32,7 @@ def generate_task_object(body):
 
     return None
 
+
 def empty_body_response():
     return {
         "statusCode": 400,
@@ -37,6 +40,7 @@ def empty_body_response():
         "body": json.dumps({"message": "Error: Cannot create task from empty object."}),
         "isBase64Encoded": False
     }
+
 
 def create_response(response, task):
     return {
